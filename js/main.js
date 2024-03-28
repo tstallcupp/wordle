@@ -1,13 +1,23 @@
-  /*----- constants -----*/
+/*----- constants -----*/
 
 
-  /*----- state variables -----*/
+/*----- state variables -----*/
 
 
-  /*----- cached elements  -----*/
+/*----- cached elements  -----*/
 
 
-  /*----- event listeners -----*/
+/*----- event listeners -----*/
 
+//* add event listener for play again button and call render()
+/*----- functions -----*/
+init();
 
-  /*----- functions -----*/
+// Initialize all state variables, then call render()
+function init(){
+ render();
+ };
+
+function render(){
+
+};
