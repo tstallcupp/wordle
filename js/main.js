@@ -19,11 +19,15 @@ const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
 let board;
 let secretWord;
 let guessedLetters;
-let maxAttempts;
-let remainingAttempts;
+let maxCount;
+let remainingCount;
+let inputCount;
+let finalWord;
 
 /*----- cached elements  -----*/
-
+const container = document.querySelector(".container");
+let winScreen = document.querySelector(".win-screen");
+let submitBtn = document.querySelector(".submit")
 
 /*----- event listeners -----*/
 
