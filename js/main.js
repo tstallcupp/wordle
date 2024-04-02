@@ -51,7 +51,7 @@ function init(){
     console.log('Initializing game...')
     // create grid in the container 
     createGrid(container);
-    createBox(container);
+    // createBox(container);
     render();
  };
 
@@ -80,7 +80,7 @@ function createBox(container, row, col, letter) {
 function createGrid(container) {
     for(let r = 0; r < maxWords; r++){
         for(let c = 0; c < inputCount; c++) {
-            // console.log(`Creating grid cell at row ${r}, column ${c}`);
+            console.log(`Creating grid cell at row ${r}, column ${c}`);
             createBox(container, r, c);
         }
     }
