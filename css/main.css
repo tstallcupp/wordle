@@ -49,11 +49,22 @@ body {
     place-content: center;
     font-size: 3em;
 }
+
+.box.right {
+    background-color: var(--right-bg);
+}
+.box.maybe{
+    background-color: var(--maybe-bg);
+}
+.box.wrong {
+    background-color: var(--wrong-bg);
+}
+
 .container, .rules{
     position: relative;
     /* background-color: blueviolet; */
     height: 33em;
-    width: 28em;
+    width: 25em;
 }
 
 .rules {
