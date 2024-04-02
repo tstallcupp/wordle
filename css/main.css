@@ -4,6 +4,13 @@
     box-sizing: border-box;
     font-family: "arimo", sans-serif;
 }
+ /* * CSS Custom Properties */
+:root {
+    --border-bg: #D3D3D3;
+    --right-bg: #50C878;
+    --maybe-bg: #FFFAA0;
+    --wrong-bg: #C0C0C0;
+  }
 
 body {
     height: 100vh;
@@ -13,7 +20,7 @@ body {
 
 .wrapper {
     display: flex;
-    /* background-color: bisque; */
+    background-color: bisque;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
@@ -24,14 +31,34 @@ body {
     box-shadow: 10px 5px 15px cornflowerblue;
     border-style: dotted;
 }
+
+.container {
+    display: grid;
+    grid-template-rows: repeat(6, auto);
+    grid-template-columns: repeat(5, auto);
+    border: 2px solid;
+}
+
+.box {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--border-bg);
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    place-content: center;
+    font-size: 3em;
+}
 .container, .rules{
     position: relative;
     /* background-color: blueviolet; */
     height: 33em;
     width: 28em;
-    border-style: dotted;
 }
 
+.rules {
+    border: 2px solid;
+}
 /* img {
     height: 30em;
     width: 27.5em;
@@ -40,3 +67,11 @@ body {
 .hide {
     display: none;
 }
+
+/* @media (max-width:1024px) {
+    .wrapper, .container, .rules, img {
+        width:90%;
+        max-width: 28em;
+    }
+    
+} */

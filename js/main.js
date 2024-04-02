@@ -2,8 +2,8 @@
 const COLOR_LOOKUP = {
     null: 'white',
     'right': '#50C878',
-    'wrong' : '#C0C0C0',
-    'maybe' : '#FFFAA0'
+    'maybe' : '#FFFAA0',
+    'wrong' : '#C0C0C0'
 }
 
 const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
