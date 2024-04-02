@@ -18,8 +18,8 @@ const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
 /*----- state variables -----*/
 let board;
 let secretWord; // holds random word from array
-let maxWords = 6; // number of words that can be guessed: 6 
-let inputCount = 5 // length of word/ number of letters that can be guessed: 5
+let maxWords = 6; // row/height/ number of words that can be guessed: 6 
+let inputCount = 5 // col/width/ length of word/ number of letters that can be guessed: 5
 
 // * cached variables while game is ongoing:
 let guessedLetters; // cached letters that were inputted
@@ -48,8 +48,9 @@ init();
 
 // Initialize all state variables, then call render()
 function init(){
+    console.log('Initializing game...')
     // create grid in the container 
-    for(let r =)
+    createGrid(container);
     createBox(container);
     render();
  };
@@ -61,6 +62,7 @@ function init(){
 
 // function to create boxes after initialized
 function createBox(container, row, col, letter) {
+    // console.log(`Creating box at row ${row}, column ${col}`)
     // assign letter param to a string
     letter = '';
     // create a new div ele called 'box'
@@ -68,8 +70,18 @@ function createBox(container, row, col, letter) {
     // assign classname
     box.className = 'box';
     //assign id with location of box
-    box.id = `box${row}${col}`
+    box.id = `box${row}-${col}`
     box.textContent = letter;
     container.appendChild(box);
-    return box;
+    console.log(box);
+    // return box;
+}
+
+function createGrid(container) {
+    for(let r = 0; r < maxWords; r++){
+        for(let c = 0; c < inputCount; c++) {
+            // console.log(`Creating grid cell at row ${r}, column ${c}`);
+            createBox(container, r, c);
+        }
+    }
 }
