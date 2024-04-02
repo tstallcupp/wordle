@@ -46,12 +46,21 @@ document.addEventListener('keydown', handleKeyPress)
 
 /*----- event handlers -----*/
 function handleKeyPress(evt) {
-    if (!gameOver) {
-        const keyPress = evt.key;
-        // console.log(keyPress)
-        //* fill the box with the keypress
-        fillBox(row, col, keyPress);
-    } 
+    // handle enter
+    if (evt.key === 'Enter') {
+        // call function to submit guess
+        submitGuess();
+        return;
+    }
+    // handle delete
+    if (evt.key === 'Backspace') {
+        //call function to delete input
+        deleteKey();
+    }
+    // check if it's a letter
+    if (evt.key.match(/^[a-zA-Z]$/)) {
+        pressedKey();
+    }
 }
 /*----- functions -----*/
 init();
