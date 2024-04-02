@@ -21,11 +21,11 @@ let secretWord; // holds random word from array
 let maxWords = 6; // number of words that can be guessed: 6 
 let inputCount = 5 // length of word/ number of letters that can be guessed: 5
 
-// * cached variables while game is ongoing
+// * cached variables while game is ongoing:
 let guessedLetters; // cached letters that were inputted
 let finalWord; // last word user inputted after max attempts
 
-//* players curr guess position below:
+//* players curr guess position:
 let row; // height / word attempt number
 let col; // width / length of word but INDICIES
 // let remainingCount; 
@@ -48,12 +48,28 @@ init();
 
 // Initialize all state variables, then call render()
 function init(){
- render();
+    // create grid in the container 
+    for(let r =)
+    createBox(container);
+    render();
  };
 
-// function to create boxes after initialized
-function createBox()
-
-function render(){
-
+ 
+ function render(){
+     
 };
+
+// function to create boxes after initialized
+function createBox(container, row, col, letter) {
+    // assign letter param to a string
+    letter = '';
+    // create a new div ele called 'box'
+    const box = document.createElement('div');
+    // assign classname
+    box.className = 'box';
+    //assign id with location of box
+    box.id = `box${row}${col}`
+    box.textContent = letter;
+    container.appendChild(box);
+    return box;
+}
