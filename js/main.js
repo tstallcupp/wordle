@@ -114,6 +114,7 @@ init();
 // Initialize all state variables, then call render()
 function init(){
     console.log('Initializing game...')
+    selectWord();
     render();
 };
 
@@ -126,6 +127,13 @@ function render(){
 };
 
 // choose random word from array 
+function selectWord(){
+    // select a random index of the WORD_LIST
+    const wordIdx = Math.floor(Math.random() * WORD_LIST.length);
+    secretWord = WORD_LIST[wordIdx];
+    // console.log(secretWord);
+}
+
 
 // function to create boxes after initialized
 function createBox(container, row, col, letter) {
@@ -161,9 +169,9 @@ function fillBox(row, col, letter) {
     }
 }
 
-function checkWord() {
+// function checkWord() {
 
-}
+// }
 
 
 
