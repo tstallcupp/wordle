@@ -30,6 +30,7 @@ body {
     border-radius: 1em;
     box-shadow: 10px 5px 15px cornflowerblue;
     /* border-style: dotted; */
+    width: 132vh
 }
 
 .container {
