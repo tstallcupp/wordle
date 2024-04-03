@@ -67,7 +67,47 @@ function handleKeyPress(evt) {
         return;
     }
 }
-//! COMPLETE FUNCTIONS FOR EVENT LISTENER
+/*----- Handler Functions -----*/
+
+function submitGuess() {
+    // take letters from boxes and compile into a word
+    // create array to hold letters
+    let wordArray = [];
+    // iterate over letters within row,col 
+    for (let i = 0; i < inputCount; i++) {
+        // grab the box id of row/col (curr index)
+        const boxId = `#box${row}-${i}`;
+        const box = document.querySelector(boxId)
+        wordArray.push(box.textContent)
+    }
+    // join array into a string
+    guessedWord = wordArray.join('')
+    console.log(guessedWord)
+    row++;
+    col = 0;
+
+    checkWord(guessedWord)
+}
+
+function deleteKey() {
+    // check if there are letters in curr col
+    if (col > 0) {
+        // decremenent col idx to move backwards
+        col--;
+        // clear the content of that col
+        fillBox(row, col, '')
+    }
+}
+
+function pressedKey(letter){
+    // check if the # of typed letters is less than 5
+    if (col < inputCount) {
+        fillBox(row, col, letter);
+        // increment col index
+        col++;
+    }
+}
+
 /*----- functions -----*/
 init();
 
@@ -84,6 +124,8 @@ function render(){
     // createBox(container);
      
 };
+
+// choose random word from array 
 
 // function to create boxes after initialized
 function createBox(container, row, col, letter) {
@@ -119,41 +161,8 @@ function fillBox(row, col, letter) {
     }
 }
 
-function submitGuess() {
-    // take letters from boxes and compile into a word
-    // create array to hold letters
-    let wordArray = [];
-    // iterate over letters within row,col 
-    for (let i = 0; i < inputCount; i++) {
-        // grab the box id of row/col (curr index)
-        const boxId = `#box${row}-${i}`;
-        const box = document.querySelector(boxId)
-        wordArray.push(box.textContent)
-    }
-    // join array into a string
-    guessedWord = wordArray.join('')
-    console.log(guessedWord)
-    row++;
-    col = 0;
-}
+function checkWord() {
 
-function deleteKey() {
-    // check if there are letters in curr col
-    if (col > 0) {
-        // decremenent col idx to move backwards
-        col--;
-        // clear the content of that col
-        fillBox(row, col, '')
-    }
-}
-
-function pressedKey(letter){
-    // check if the # of typed letters is less than 5
-    if (col < inputCount) {
-        fillBox(row, col, letter);
-        // increment col index
-        col++;
-    }
 }
 
 
