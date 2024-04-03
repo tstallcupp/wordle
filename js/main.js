@@ -46,6 +46,7 @@ document.addEventListener('keydown', handleKeyPress)
 
 /*----- event handlers -----*/
 function handleKeyPress(evt) {
+    // console.log(evt.key)
     // handle enter
     if (evt.key === 'Enter') {
         // call function to submit guess
@@ -59,9 +60,10 @@ function handleKeyPress(evt) {
     }
     // check if it's a letter
     if (evt.key.match(/^[a-zA-Z]$/)) {
-        pressedKey();
+        pressedKey(evt.key);
     }
 }
+//! COMPLETE FUNCTIONS FOR EVENT LISTENER
 /*----- functions -----*/
 init();
 
@@ -110,5 +112,29 @@ function fillBox(row, col, letter) {
     const box = document.querySelector(boxId);
     if (box) {
         box.textContent = letter;
+    }
+}
+
+function pressedKey(letter){
+    // check if the # of typed letters is less than 5
+    if (col < inputCount) {
+        fillBox(row, col, letter);
+        // increment col index
+        col++;
+    }
+    if (col === inputCount) {
+        submitGuess();
+    }
+}
+
+
+
+function deleteKey() {
+    // check if there are letters in curr col
+    if (col > 0) {
+        // decremenent col idx to move backwards
+        col--;
+        // clear the content of that col
+        fillBox(row, col, '')
     }
 }
