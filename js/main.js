@@ -23,6 +23,7 @@ let inputCount = 5 // col/width/ length of word/ number of letters that can be g
 
 // * cached variables while game is ongoing:
 let guessedLetters; // cached letters that were inputted
+let guessedWord;
 let finalWord; // last word user inputted after max attempts
 
 //* players curr guess position:
@@ -50,7 +51,9 @@ function handleKeyPress(evt) {
     // handle enter
     if (evt.key === 'Enter') {
         // call function to submit guess
-        submitGuess();
+        if (col === inputCount) {
+            submitGuess();
+        }
         return;
     }
     // handle delete
@@ -61,6 +64,7 @@ function handleKeyPress(evt) {
     // check if it's a letter
     if (evt.key.match(/^[a-zA-Z]$/)) {
         pressedKey(evt.key);
+        return;
     }
 }
 //! COMPLETE FUNCTIONS FOR EVENT LISTENER
@@ -115,19 +119,23 @@ function fillBox(row, col, letter) {
     }
 }
 
-function pressedKey(letter){
-    // check if the # of typed letters is less than 5
-    if (col < inputCount) {
-        fillBox(row, col, letter);
-        // increment col index
-        col++;
+function submitGuess() {
+    // take letters from boxes and compile into a word
+    // create array to hold letters
+    let wordArray = [];
+    // iterate over letters within row,col 
+    for (let i = 0; i < inputCount; i++) {
+        // grab the box id of row/col (curr index)
+        const boxId = `#box${row}-${i}`;
+        const box = document.querySelector(boxId)
+        wordArray.push(box.textContent)
     }
-    if (col === inputCount) {
-        submitGuess();
-    }
+    // join array into a string
+    guessedWord = wordArray.join('')
+    console.log(guessedWord)
+    row++;
+    col = 0;
 }
-
-
 
 function deleteKey() {
     // check if there are letters in curr col
@@ -138,3 +146,15 @@ function deleteKey() {
         fillBox(row, col, '')
     }
 }
+
+function pressedKey(letter){
+    // check if the # of typed letters is less than 5
+    if (col < inputCount) {
+        fillBox(row, col, letter);
+        // increment col index
+        col++;
+    }
+}
+
+
+
