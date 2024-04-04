@@ -29,7 +29,6 @@ let finalWord; // last word user inputted after max attempts
 //* players curr guess position:
 let row = 0; // height / word attempt number
 let col = 0; // width / length of word but INDICIES
-// let remainingCount; 
 
 //* boolean to know if game is ongoing/ over
 let gameOver = false;
@@ -37,8 +36,10 @@ let gameOver = false;
 
 
 /*----- cached elements  -----*/
-const container = document.querySelector(".container");
+const container = document.querySelector('.container');
 const answer = document.getElementById('answer');
+const winScreen = document.getElementById('win-screen');
+// const resetBtn = document.getElementById('reset-btn');
 console.log(answer);
 // let winScreen = document.querySelector(".win-screen");
 // let submitBtn = document.querySelector(".submit")
@@ -72,6 +73,7 @@ function handleKeyPress(evt) {
         gameOver = true;
         // populate answer at the bottom
         answer.textContent = targetWord;
+        resetWindow();
     }
 }
 /*----- Handler Functions -----*/
@@ -109,6 +111,9 @@ init();
 // Initialize all state variables, then call render()
 function init(){
     console.log('Initializing game...')
+    // winScreen.style.display = 'none';
+    // resetBtn.style.visibility = 'hidden';
+    container.innerHTML = '';
     selectWord();
     render();
 };
@@ -118,7 +123,7 @@ function render(){
     // create grid in the container 
     createGrid(container);
     // createBox(container);
-     
+
 };
 
 // choose random word from array 
@@ -172,7 +177,7 @@ function checkWord() {
         // grab the box id of row/col (curr index)
         const boxId = `#box${row}-${i}`;
         const currBox = document.querySelector(boxId)
-        
+
         let letter = currBox.textContent;
         guessedWord.push(letter)
 
@@ -195,21 +200,14 @@ function checkWord() {
 
 }
 
-
-// function currentWord() {
-//     // take letters from boxes and compile into a word
-//     // create array to hold letters
-//     let wordArray = [];
-//     // iterate over letters within row,col 
-//     for (let i = 0; i < inputCount; i++) {
-//         // grab the box id of row/col (curr index)
-//         const boxId = `#box${row}-${i}`;
-//         const box = document.querySelector(boxId)
-//         // take letters of individual boxes and push into empty array
-//         wordArray.push(box.textContent)
-//     }
-//     // join array into a string
-//     guessedWord = wordArray.join('')
-//     return guessedWord;
-// }
+function resetWindow() {
+    winScreen.textContent = 'Thanks for playing!';
+    winScreen.style.display = 'block';
+    // winScreen.style.visibility = 'visible';
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = 'Play Again';
+    // resetBtn.style.visibility = 'visible';
+    resetBtn.addEventListener('click', init);
+    winScreen.appendChild(resetBtn);
+}
 
