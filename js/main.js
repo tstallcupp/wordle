@@ -39,6 +39,7 @@ let gameOver = false;
 /*----- cached elements  -----*/
 const container = document.querySelector(".container");
 const answer = document.getElementById('answer');
+console.log(answer);
 // let winScreen = document.querySelector(".win-screen");
 // let submitBtn = document.querySelector(".submit")
 
@@ -70,7 +71,7 @@ function handleKeyPress(evt) {
     if (!gameOver && row == maxWords) {
         gameOver = true;
         // populate answer at the bottom
-        answer.innerText = targetWord
+        answer.textContent = targetWord;
     }
 }
 /*----- Handler Functions -----*/
