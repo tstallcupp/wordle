@@ -76,12 +76,11 @@ function handleKeyPress(evt) {
 /*----- Handler Functions -----*/
 
 function submitGuess() {
-    guessedWord = currentWord();
+    checkWord();
     console.log('submitGuess(): ',guessedWord)
     row++;
     col = 0;
 
-    checkWord(guessedWord);
 }
 
 function deleteKey() {
@@ -165,52 +164,51 @@ function fillBox(row, col, letter) {
 }
 
 // checks word against target word
-function checkWord(guessedWord) {
-    // empty string variable to hold certain letters
-    let feedback = '';
-    // iterate over the word to check every letter
-    for (let i = 0; i < inputCount; i++) {
-        const guessedLetter = guessedWord[i]; 
-        // console.log(guessedLetter);
-        const targetLetter = targetWord[i];
-        // console.log(targetLetter)
-
-        // check if word for the correct letter & position
-        if (guessedLetter === targetLetter) {
-            feedback+= 'right';
-            console.log('correct letter & position: ', right);
-        }
-        // check if the word has the correct letter & wrong position use .includes
-        else if (targetWord.includes(guessedLetter)) {
-            feedback+= 'maybe';
-            console.log('correct letter, wrong position: ', maybe);
-        }
-        else {
-            feedback+= 'wrong';
-            console.log('absent letter: ', wrong);
-            
-        }
-    }
-
-    if (guessedWord === targetWord) {
-        console.log('correct')
-    }
-}
-
-function currentWord() {
-    // take letters from boxes and compile into a word
-    // create array to hold letters
-    let wordArray = [];
+function checkWord() {
+    guessedWord = [];
     // iterate over letters within row,col 
     for (let i = 0; i < inputCount; i++) {
         // grab the box id of row/col (curr index)
         const boxId = `#box${row}-${i}`;
-        const box = document.querySelector(boxId)
-        // take letters of individual boxes and push into empty array
-        wordArray.push(box.textContent)
+        const currBox = document.querySelector(boxId)
+        
+        let letter = currBox.textContent;
+        guessedWord.push(letter)
+
+        if (targetWord[i] === letter) {
+            currBox.classList.add('right');
+        } 
+        else if (targetWord.includes(letter)) {
+            currBox.classList.add('maybe');
+        }
+        else {
+            currBox.classList.add('wrong');
+        }
+
+        console.log('guessed word: ', guessedWord)
+
     }
-    // join array into a string
-    guessedWord = wordArray.join('')
-    return guessedWord;
+
+    // if (guessedWord === targetWord) {
+    //     console.log('correct')
+    // }
 }
+
+
+// function currentWord() {
+//     // take letters from boxes and compile into a word
+//     // create array to hold letters
+//     let wordArray = [];
+//     // iterate over letters within row,col 
+//     for (let i = 0; i < inputCount; i++) {
+//         // grab the box id of row/col (curr index)
+//         const boxId = `#box${row}-${i}`;
+//         const box = document.querySelector(boxId)
+//         // take letters of individual boxes and push into empty array
+//         wordArray.push(box.textContent)
+//     }
+//     // join array into a string
+//     guessedWord = wordArray.join('')
+//     return guessedWord;
+// }
 
