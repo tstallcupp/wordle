@@ -39,7 +39,7 @@ let gameOver = false;
 const container = document.querySelector('.container');
 const answer = document.getElementById('answer');
 const winScreen = document.getElementById('win-screen');
-// const resetBtn = document.getElementById('reset-btn');
+const resetBtn = document.getElementById('reset-btn');
 console.log(answer);
 // let winScreen = document.querySelector(".win-screen");
 // let submitBtn = document.querySelector(".submit")
@@ -64,12 +64,14 @@ function handleKeyPress(evt) {
     // handle enter
     else if (evt.key === 'Enter') {
         // call function to submit guess
+        // if the columns are filled then call submitGuess
         if (col === inputCount) {
             submitGuess();
         }
     }
     // end the game
-    if (!gameOver && row == maxWords) {
+    // if all rows have been submitted then play again
+    if (row == maxWords) {
         gameOver = true;
         // populate answer at the bottom
         answer.textContent = targetWord;
@@ -79,8 +81,14 @@ function handleKeyPress(evt) {
 /*----- Handler Functions -----*/
 
 function submitGuess() {
+    // check if word is valid (in the word list)
+    // if (!WORD_LIST.includes(guessedWord)) {
+    //     // console.log(guessedWord)
+    //     alert('Not in word list')
+    // }
     checkWord();
-    console.log('submitGuess(): ',guessedWord)
+    // console.log('submitGuess(): ',guessedWord)
+    // increment to the next row & start at col[0]
     row++;
     col = 0;
 
@@ -112,8 +120,12 @@ init();
 function init(){
     console.log('Initializing game...')
     // winScreen.style.display = 'none';
-    // resetBtn.style.visibility = 'hidden';
+    winScreen.style.visibility = 'hidden';
     container.innerHTML = '';
+    gameOver = false;
+    row = 0;
+    col = 0;
+
     selectWord();
     render();
 };
@@ -131,7 +143,7 @@ function selectWord(){
     // select a random index of the WORD_LIST
     const wordIdx = Math.floor(Math.random() * WORD_LIST.length);
     targetWord = WORD_LIST[wordIdx];
-    console.log(targetWord);
+    console.log('Target Word:',targetWord);
 }
 
 
@@ -172,8 +184,9 @@ function fillBox(row, col, letter) {
 // checks word against target word
 function checkWord() {
     guessedWord = [];
-    // iterate over letters within row,col 
+    // iterate over each letter in current word: row,col 
     for (let i = 0; i < inputCount; i++) {
+        // get the content of the current box
         // grab the box id of row/col (curr index)
         const boxId = `#box${row}-${i}`;
         const currBox = document.querySelector(boxId)
@@ -181,19 +194,23 @@ function checkWord() {
         let letter = currBox.textContent;
         guessedWord.push(letter)
 
+        // correct letter & position
         if (targetWord[i] === letter) {
             currBox.classList.add('right');
         } 
+        // correct letter & wrong position
         else if (targetWord.includes(letter)) {
             currBox.classList.add('maybe');
         }
+        // incorrect letter
         else {
             currBox.classList.add('wrong');
         }
-
+        // if the word matches the target word, end the game
         console.log('guessed word: ', guessedWord)
         if (guessedWord.join('') === targetWord) {
             gameOver = true;
+            resetWindow();
             console.log('correct')
         }
     }
@@ -201,12 +218,14 @@ function checkWord() {
 }
 
 function resetWindow() {
-    winScreen.textContent = 'Thanks for playing!';
-    winScreen.style.display = 'block';
-    // winScreen.style.visibility = 'visible';
-    const resetBtn = document.createElement('button');
+    winScreen.display = 'block'
+    winScreen.style.visibility = 'visible';
+    if(row === maxWords) {
+        winScreen.textContent = `Sorry! the word was ${targetWord} `
+    } else {
+        winScreen.textContent = 'Thanks for playing!';
+    }
     resetBtn.textContent = 'Play Again';
-    // resetBtn.style.visibility = 'visible';
     resetBtn.addEventListener('click', init);
     winScreen.appendChild(resetBtn);
 }
