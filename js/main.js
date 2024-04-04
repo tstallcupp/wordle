@@ -17,7 +17,7 @@ const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
 
 /*----- state variables -----*/
 let board;
-let secretWord; // holds random word from array
+let targetWord; // holds random word from array
 let maxWords = 6; // row/height/ number of words that can be guessed: 6 
 let inputCount = 5 // col/width/ length of word/ number of letters that can be guessed: 5
 
@@ -38,6 +38,7 @@ let gameOver = false;
 
 /*----- cached elements  -----*/
 const container = document.querySelector(".container");
+const answer = document.getElementById('answer');
 // let winScreen = document.querySelector(".win-screen");
 // let submitBtn = document.querySelector(".submit")
 
@@ -47,46 +48,40 @@ document.addEventListener('keydown', handleKeyPress)
 
 /*----- event handlers -----*/
 function handleKeyPress(evt) {
-    // console.log(evt.key)
-    // handle enter
-    if (evt.key === 'Enter') {
-        // call function to submit guess
-        if (col === inputCount) {
-            submitGuess();
-        }
-        return;
-    }
-    // handle delete
-    if (evt.key === 'Backspace') {
-        //call function to delete input
-        deleteKey();
-    }
+    if (gameOver) return;
     // check if it's a letter
     if (evt.key.match(/^[a-zA-Z]$/)) {
         pressedKey(evt.key);
         return;
     }
+    // handle delete
+    else if (evt.key === 'Backspace') {
+        //call function to delete input
+        deleteKey();
+    }
+    // handle enter
+    else if (evt.key === 'Enter') {
+        // call function to submit guess
+        if (col === inputCount) {
+            submitGuess();
+        }
+    }
+    // end the game
+    if (!gameOver && row == maxWords) {
+        gameOver = true;
+        // populate answer at the bottom
+        answer.innerText = targetWord
+    }
 }
 /*----- Handler Functions -----*/
 
 function submitGuess() {
-    // take letters from boxes and compile into a word
-    // create array to hold letters
-    let wordArray = [];
-    // iterate over letters within row,col 
-    for (let i = 0; i < inputCount; i++) {
-        // grab the box id of row/col (curr index)
-        const boxId = `#box${row}-${i}`;
-        const box = document.querySelector(boxId)
-        wordArray.push(box.textContent)
-    }
-    // join array into a string
-    guessedWord = wordArray.join('')
-    console.log(guessedWord)
+    guessedWord = currentWord();
+    console.log('submitGuess(): ',guessedWord)
     row++;
     col = 0;
 
-    checkWord(guessedWord)
+    checkWord(guessedWord);
 }
 
 function deleteKey() {
@@ -130,8 +125,8 @@ function render(){
 function selectWord(){
     // select a random index of the WORD_LIST
     const wordIdx = Math.floor(Math.random() * WORD_LIST.length);
-    secretWord = WORD_LIST[wordIdx];
-    // console.log(secretWord);
+    targetWord = WORD_LIST[wordIdx];
+    console.log(targetWord);
 }
 
 
@@ -169,9 +164,53 @@ function fillBox(row, col, letter) {
     }
 }
 
-// function checkWord() {
+// checks word against target word
+function checkWord(guessedWord) {
+    // empty string variable to hold certain letters
+    let feedback = '';
+    // iterate over the word to check every letter
+    for (let i = 0; i < inputCount; i++) {
+        const guessedLetter = guessedWord[i]; 
+        // console.log(guessedLetter);
+        const targetLetter = targetWord[i];
+        // console.log(targetLetter)
 
-// }
+        // check if word for the correct letter & position
+        if (guessedLetter === targetLetter) {
+            feedback+= 'right';
+            console.log('correct letter & position: ', right);
+        }
+        // check if the word has the correct letter & wrong position use .includes
+        else if (targetWord.includes(guessedLetter)) {
+            feedback+= 'maybe';
+            console.log('correct letter, wrong position: ', maybe);
+        }
+        else {
+            feedback+= 'wrong';
+            console.log('absent letter: ', wrong);
+            
+        }
+    }
 
+    if (guessedWord === targetWord) {
+        console.log('correct')
+    }
+}
 
+function currentWord() {
+    // take letters from boxes and compile into a word
+    // create array to hold letters
+    let wordArray = [];
+    // iterate over letters within row,col 
+    for (let i = 0; i < inputCount; i++) {
+        // grab the box id of row/col (curr index)
+        const boxId = `#box${row}-${i}`;
+        const box = document.querySelector(boxId)
+        // take letters of individual boxes and push into empty array
+        wordArray.push(box.textContent)
+    }
+    // join array into a string
+    guessedWord = wordArray.join('')
+    return guessedWord;
+}
 

@@ -17,7 +17,11 @@ body {
     background: linear-gradient(90deg, rgba(237,246,182,0.8127626050420168) 0%, rgba(244,208,245,0.8883928571428571) 100%);
     /* background-color: burlywood; */
 }
-
+h1 {
+    margin-top: 1em;
+    text-align: center;
+    /* font-size: ; */
+}
 .wrapper {
     display: flex;
     /* background-color: bisque; */
@@ -30,7 +34,7 @@ body {
     border-radius: 1em;
     box-shadow: 10px 5px 15px cornflowerblue;
     /* border-style: dotted; */
-    width: 95vh
+    width: 54em;
 }
 
 .container {
@@ -44,21 +48,26 @@ body {
     width: 60px;
     height: 60px;
     border: 2px solid var(--border-bg);
-    color: white;
+    color: black;
     text-transform: uppercase;
     text-align: center;
     place-content: center;
-    font-size: 3em;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 .box.right {
     background-color: var(--right-bg);
+    color: white;
+    
 }
 .box.maybe{
     background-color: var(--maybe-bg);
+    color: white;
 }
 .box.wrong {
     background-color: var(--wrong-bg);
+    color: white;
 }
 
 .container, .rules{
@@ -68,22 +77,8 @@ body {
     width: 25em;
 }
 
-/* .rules {
-    border: 2px solid;
-} */
-/* img {
-    height: 30em;
-    width: 27.5em;
-} */
 
 .hide {
     display: none;
 }
 
-/* @media (max-width:1024px) {
-    .wrapper, .container, .rules, img {
-        width:90%;
-        max-width: 28em;
-    }
-    
-} */
