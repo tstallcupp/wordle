@@ -186,12 +186,12 @@ function checkWord() {
         }
 
         console.log('guessed word: ', guessedWord)
-
+        if (guessedWord.join('') === targetWord) {
+            gameOver = true;
+            console.log('correct')
+        }
     }
 
-    // if (guessedWord === targetWord) {
-    //     console.log('correct')
-    // }
 }
 
 
