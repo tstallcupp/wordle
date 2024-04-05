@@ -228,7 +228,7 @@ function resetWindow() {
     if(row === maxWords) {
         title.textContent = `Sorry! The word was ${targetWord} `
     } else {
-        title.textContent = 'Congrats! You won!';
+        title.textContent = "🥳🎉You're Correct!🎉🥳";
     }
     resetBtn.textContent = 'Play Again';
     resetBtn.addEventListener('click', init);

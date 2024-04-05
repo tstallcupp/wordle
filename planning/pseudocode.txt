@@ -1,0 +1,77 @@
+1) Define required constants:
+   1.1) Define an array containing a list of words for the game.
+
+2) Define state variables:
+   2.1) Define:
+       - board: 2D array representing the game board.
+       - secretWord: a randomly chosen word from the array of words.
+       - maxWords: maximum number of word attempts (set to 6).
+       - inputCount: number of letters that can be guessed in a word (set to 5).
+       - guessedLetters: array to cache the letters that were inputted.
+       - finalWord: the last word user inputted after max attempts.
+       - row: height / word attempt number.
+       - col: width / length of word but indices.
+       - gameOver: boolean for game state (false for ongoing).
+
+3) Cached DOM elements:
+   3.1) container: References the container element where the game board is displayed.
+
+4) Event Listeners
+
+5) Initialize the game:
+   5.1) Call the render function to set up the initial game board.
+
+6) Render Function:
+   6.1) Define rendering logic to update the game board based on the current game state, including colors to represent correct, incorrect, or partially correct letters.
+   6.2) Call the grid function to create the grid on the container.
+
+7) Define grid function to create the game board:
+   7.1) Take the container DOM element as its parameter.
+   7.2) Create a loop to make 6 rows.
+       7.2.1) Create a nested loop to make 5 columns.
+       7.2.2) Call the createBox function to create individual boxes for each iteration.
+
+8) Define createBox function to create individual boxes on the game board:
+   8.1) Take the container, row, col, and letter as parameters.
+   8.2) Create a new div element (box).
+   8.3) Assign the class name of 'box'.
+   8.4) Assign an id with the location of the box.
+   8.5) Set the text content to letter.
+   8.6) Append the box to the container.
+
+9) Add Event Listeners:
+   9.1) Create an event listener for key presses to handle user input.
+
+10) Define Handler function for key presses:
+    10.1) Check if the pressed key is alphabetical.
+    10.2) Call the fillBox function to fill the current box with the pressed key.
+    10.3) Increment the current column.
+    10.4) If the columns are filled in the current row:
+          10.4.1) Reset the column index to 0 and increment the row.
+          10.4.2) If the rows are filled:
+                  10.4.2.1) Set the game status to true, signaling that the game is over.
+
+11) Define fillBox function to update the game board with user input:
+    11.1) Select the box id corresponding to the current row and column.
+    11.2) Set the text content of the box to the user input.
+
+12) Implement Game Logic:
+    12.1) Randomly select a word from the array of words as the secret word.
+    12.2) Compare user input against the secret word to determine correctness.
+    12.3) Update the game state based on user input and game rules.
+    12.4) Check if the guessed word matches the secret word after each attempt.
+
+13) Handle Incorrect Guesses:
+    13.1) Implement logic to track incorrect guesses and update the game board accordingly.
+    13.2) Limit the number of incorrect guesses allowed.
+
+14) Handle End Game Logic:
+    14.1) Check if the user has reached the maximum number of attempts.
+    14.2) Display the final word if the user fails to guess within the allowed attempts.
+    14.3) Provide an option to play again.
+    14.4) Reset the game state if the user chooses to play again.
+
+15) IceBox Features (Optional):
+    15.1) Add a timer to limit the time for each guess.
+
+

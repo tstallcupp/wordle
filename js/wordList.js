@@ -774,7 +774,6 @@
     'arise',
     'witch',
     'loves',
-    'queer',
     'dwell',
     'backs',
     'ropes',
@@ -2603,6 +2602,7 @@
     'flops',
     'weeps',
     'mints',
-    'basil'
+    'basil',
+    'wispy'
 ];
 
