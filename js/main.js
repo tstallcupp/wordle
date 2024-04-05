@@ -226,7 +226,7 @@ function resetWindow() {
     winScreen.style.visibility = 'visible';
     targetWord = targetWord.toUpperCase();
     if(row === maxWords) {
-        title.textContent = `Sorry! The word was ${targetWord} `
+        title.textContent = `Sorry😿The word was ${targetWord} `
     } else {
         title.textContent = "🥳🎉You're Correct!🎉🥳";
     }
