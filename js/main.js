@@ -9,7 +9,6 @@ const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
 "dream", "frost", "crane", "grain", "waste"]
 
 /*----- state variables -----*/
-let board;
 let targetWord; // holds random word from array
 let maxWords = 6; // row/height/ number of words that can be guessed: 6 
 let inputCount = 5 // col/width/ length of word/ number of letters that can be guessed: 5
