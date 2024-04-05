@@ -21,7 +21,6 @@ let gameOver = false;
 
 /*----- cached elements  -----*/
 const container = document.querySelector('.container');
-const answer = document.getElementById('answer');
 const winScreen = document.getElementById('win-screen');
 const resetBtn = document.getElementById('reset-btn')
 const title = document.getElementById('win-title')
@@ -51,8 +50,6 @@ function handleKeyPress(evt) {
 
     if (row == maxWords) {
         gameOver = true;
-        // populate answer at the bottom
-        answer.textContent = targetWord;
         resetWindow();
     }
 }
