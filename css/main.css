@@ -14,7 +14,6 @@
 
 body {
     background: linear-gradient(90deg, rgba(237,246,182,0.8127626050420168) 0%, rgba(244,208,245,0.8883928571428571) 100%);
-    /* background-color: burlywood; */
 }
 h1 {
     margin-top: 1em;
@@ -33,13 +32,11 @@ h2 {
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    /* gap: 1em; */
     position: absolute;
     padding: 1em;
     border-radius: 1em;
     background-color: rgba(255, 255, 255, 0.795);
     box-shadow: 10px 5px 15px rgba(237, 174, 192, 0.644);
-    /* border-style: dotted; */
     width: 54em;
 }
 
@@ -47,7 +44,6 @@ h2 {
     display: grid;
     grid-template-rows: repeat(6, auto);
     grid-template-columns: repeat(5, auto);
-    /* border: 2px solid; */
 }
 
 .box {
@@ -79,7 +75,6 @@ h2 {
 
 .container, .rules{
     position: relative;
-    /* background-color: blueviolet; */
     height: 33em;
     width: 25em;
 }
