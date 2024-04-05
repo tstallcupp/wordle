@@ -1,12 +1,13 @@
 /*----- constants -----*/
-const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
-"lemon", "ocean", "piano", "zebra", "tiger",
-"cloud", "fairy", "melon", "smile", "earth",
-"pizza", "train", "beach", "horse", "river",
-"mouse", "chair", "angel", "snake", "water",
-"sugar", "tulip", "frost", "bread", "crown",
-"dizzy", "shout", "laugh", "dance", "smell",
-"dream", "frost", "crane", "grain", "waste"]
+import { WORD_LIST } from './wordList.js';
+// const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
+// "lemon", "ocean", "piano", "zebra", "tiger",
+// "cloud", "fairy", "melon", "smile", "earth",
+// "pizza", "train", "beach", "horse", "river",
+// "mouse", "chair", "angel", "snake", "water",
+// "sugar", "tulip", "frost", "bread", "crown",
+// "dizzy", "shout", "laugh", "dance", "smell",
+// "dream", "frost", "crane", "grain", "waste"]
 
 /*----- state variables -----*/
 let targetWord; // holds random word from array
