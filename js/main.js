@@ -22,8 +22,8 @@ let maxWords = 6; // row/height/ number of words that can be guessed: 6
 let inputCount = 5 // col/width/ length of word/ number of letters that can be guessed: 5
 
 // * cached variables while game is ongoing:
-let guessedLetters; // cached letters that were inputted
-let guessedWord;
+let letter; // cached letters that were inputted
+let guessedWord = [];
 let finalWord; // last word user inputted after max attempts
 
 //* players curr guess position:
@@ -40,9 +40,6 @@ const container = document.querySelector('.container');
 const answer = document.getElementById('answer');
 const winScreen = document.getElementById('win-screen');
 const resetBtn = document.getElementById('reset-btn');
-console.log(answer);
-// let winScreen = document.querySelector(".win-screen");
-// let submitBtn = document.querySelector(".submit")
 
 /*----- event listeners -----*/
 document.addEventListener('keydown', handleKeyPress)
@@ -65,6 +62,10 @@ function handleKeyPress(evt) {
     else if (evt.key === 'Enter') {
         // call function to submit guess
         // if the columns are filled then call submitGuess
+        if (col < inputCount) {
+            console.log('Word is not long enough')
+            return;
+        }    
         if (col === inputCount) {
             submitGuess();
         }
@@ -79,21 +80,6 @@ function handleKeyPress(evt) {
     }
 }
 /*----- Handler Functions -----*/
-
-function submitGuess() {
-    // check if word is valid (in the word list)
-    // if (!WORD_LIST.includes(guessedWord)) {
-    //     // console.log(guessedWord)
-    //     alert('Not in word list')
-    // }
-    checkWord();
-    // console.log('submitGuess(): ',guessedWord)
-    // increment to the next row & start at col[0]
-    row++;
-    col = 0;
-
-}
-
 function deleteKey() {
     // check if there are letters in curr col
     if (col > 0) {
@@ -112,6 +98,45 @@ function pressedKey(letter){
         col++;
     }
 }
+
+function submitGuess() {
+    createWordArray();
+    console.log('word array: ', guessedWord)
+
+    guessedWord = guessedWord.join('');
+    console.log(`checking if guessed word is in WORD_LIST`);
+    if (!WORD_LIST.includes(guessedWord)) {
+        console.log('guessed word does not exist in WORD_LIST');
+        return;
+    }
+    if (WORD_LIST.includes(guessedWord)) {
+        console.log('VALID WORD')
+    }
+    
+    checkWord();
+    // console.log('submitGuess(): ',guessedWord)
+    // increment to the next row & start at col[0]
+    row++;
+    col = 0;
+}
+
+function createWordArray(){
+     // create the word using this for loop
+    // iterate over each letter in current word: row,col
+    guessedWord = [];
+    for (let i = 0; i < inputCount; i++) {
+        // get the content of the current box
+        // grab the box id of row/col (curr index)
+        const boxId = `#box${row}-${i}`;
+        const currBox = document.querySelector(boxId);
+
+        let letter = currBox.textContent;
+        guessedWord.push(letter);
+        // creating a string from the array
+    }
+    return guessedWord;
+}
+
 
 /*----- functions -----*/
 init();
@@ -183,21 +208,19 @@ function fillBox(row, col, letter) {
 
 // checks word against target word
 function checkWord() {
-    guessedWord = [];
-    // iterate over each letter in current word: row,col 
+    console.log('checkWord----------------------');
+    // if the word matches the target word, end the game
+    console.log('guessed word: ', guessedWord);
+   
     for (let i = 0; i < inputCount; i++) {
-        // get the content of the current box
-        // grab the box id of row/col (curr index)
         const boxId = `#box${row}-${i}`;
-        const currBox = document.querySelector(boxId)
-
-        let letter = currBox.textContent;
-        guessedWord.push(letter)
+        const currBox = document.querySelector(boxId);
+        let letter = guessedWord[i]
 
         // correct letter & position
         if (targetWord[i] === letter) {
             currBox.classList.add('right');
-        } 
+        }
         // correct letter & wrong position
         else if (targetWord.includes(letter)) {
             currBox.classList.add('maybe');
@@ -206,15 +229,13 @@ function checkWord() {
         else {
             currBox.classList.add('wrong');
         }
-        // if the word matches the target word, end the game
-        console.log('guessed word: ', guessedWord)
-        if (guessedWord.join('') === targetWord) {
-            gameOver = true;
-            resetWindow();
-            console.log('correct')
-        }
     }
 
+    if (guessedWord === targetWord) {
+        gameOver = true;
+        resetWindow();
+        console.log('correct');
+    }
 }
 
 function resetWindow() {
