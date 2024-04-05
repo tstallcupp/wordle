@@ -1,4 +1,4 @@
-export const WORD_LIST = [
+ const WORD_LIST = [
     'which',
     'there',
     'their',
@@ -2606,4 +2606,3 @@ export const WORD_LIST = [
     'basil'
 ];
 
-export {WORD_LIST};

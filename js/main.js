@@ -1,5 +1,5 @@
 /*----- constants -----*/
-import { WORD_LIST } from './wordList.js';
+// import { WORD_LIST } from './wordList.js';
 // const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
 // "lemon", "ocean", "piano", "zebra", "tiger",
 // "cloud", "fairy", "melon", "smile", "earth",
