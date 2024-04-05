@@ -1,11 +1,4 @@
 /*----- constants -----*/
-// const COLOR_LOOKUP = {
-//     null: 'white',
-//     'right': '#50C878',
-//     'maybe' : '#FFFAA0',
-//     'wrong' : '#C0C0C0'
-// }
-
 const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
 "lemon", "ocean", "piano", "zebra", "tiger",
 "cloud", "fairy", "melon", "smile", "earth",
@@ -24,7 +17,6 @@ let inputCount = 5 // col/width/ length of word/ number of letters that can be g
 // * cached variables while game is ongoing:
 let letter; // cached letters that were inputted
 let guessedWord = [];
-let finalWord; // last word user inputted after max attempts
 
 //* players curr guess position:
 let row = 0; // height / word attempt number
