@@ -30,7 +30,6 @@ h1 {
 }
 .wrapper {
     display: flex;
-    /* background-color: bisque; */
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
@@ -96,8 +95,5 @@ h1 {
     /* visibility: hidden; */
 }
 
-#reset-btn {
-    
-}
 
 
