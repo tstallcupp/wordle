@@ -1,13 +1,5 @@
 /*----- constants -----*/
-// import { WORD_LIST } from './wordList.js';
-// const WORD_LIST = ["table", "chair", "apple", "happy", "grape",
-// "lemon", "ocean", "piano", "zebra", "tiger",
-// "cloud", "fairy", "melon", "smile", "earth",
-// "pizza", "train", "beach", "horse", "river",
-// "mouse", "chair", "angel", "snake", "water",
-// "sugar", "tulip", "frost", "bread", "crown",
-// "dizzy", "shout", "laugh", "dance", "smell",
-// "dream", "frost", "crane", "grain", "waste"]
+//* wordList.js
 
 /*----- state variables -----*/
 let targetWord; // holds random word from array
@@ -31,7 +23,8 @@ let gameOver = false;
 const container = document.querySelector('.container');
 const answer = document.getElementById('answer');
 const winScreen = document.getElementById('win-screen');
-const resetBtn = document.getElementById('reset-btn');
+const resetBtn = document.getElementById('reset-btn')
+const title = document.getElementById('win-title')
 
 /*----- event listeners -----*/
 document.addEventListener('keydown', handleKeyPress)
@@ -136,7 +129,6 @@ init();
 // Initialize all state variables, then call render()
 function init(){
     console.log('Initializing game...')
-    // winScreen.style.display = 'none';
     winScreen.style.visibility = 'hidden';
     container.innerHTML = '';
     gameOver = false;
@@ -231,15 +223,14 @@ function checkWord() {
 }
 
 function resetWindow() {
-    winScreen.display = 'block'
     winScreen.style.visibility = 'visible';
+    targetWord = targetWord.toUpperCase();
     if(row === maxWords) {
-        winScreen.textContent = `Sorry! the word was ${targetWord} `
+        title.textContent = `Sorry! The word was ${targetWord} `
     } else {
-        winScreen.textContent = 'Thanks for playing!';
+        title.textContent = 'Congrats! You won!';
     }
     resetBtn.textContent = 'Play Again';
     resetBtn.addEventListener('click', init);
-    winScreen.appendChild(resetBtn);
 }
 
